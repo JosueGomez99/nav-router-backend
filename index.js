@@ -38,6 +38,20 @@ app.get('/api/canciones', (req, res) => {
   });
 });
 
+app.get('/api/noticias', async (req, res) => {
+  try {
+    // Realiza una consulta SQL para seleccionar todas las noticias
+    const query = 'SELECT * FROM noticias;';
+    const result = await db.query(query); // Utiliza el objeto db para realizar la consulta
+
+    // Devuelve las noticias como respuesta
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener noticias:', error);
+    res.status(500).json({ error: 'Error al obtener noticias' });
+  }
+});
+
 // Resto de tu configuración de Express para servir las canciones y demás rutas...
 
 app.listen(port, () => {
